@@ -1,0 +1,15 @@
+<resources>
+    <string name="app_name">Weather_APP</string>
+    <string name="hello_world">Hello World</string>
+    <string name="city_input">Enter Your City</string>
+    <string name="find_button">Search Weather</string>
+    <string name="updated_at">Updated At:</string>
+    <string name="coordinates">Coordinates</string>
+    <string name="wind">Wind</string>
+    <string name="temp_var">Temp Var</string>
+    <string name="humidity">Humidity</string>
+    <string name="visibility">Visibility</string>
+    <string name="pressure">Pressure</string>
+    <string name="temp">Temp</string>
+    <string name="weather_app">Weather App</string>
+</resources>
