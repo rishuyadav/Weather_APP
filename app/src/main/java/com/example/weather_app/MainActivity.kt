@@ -40,14 +40,14 @@ class MainActivity : AppCompatActivity() {
         retrofitData.enqueue(object : Callback<Weather_Data?> {
 
             override fun onResponse(call: Call<Weather_Data?>, response: Response<Weather_Data?>) {
-                val response_body = response.body()!!
-                val temp:String? = String.format("%.2f", response_body.main.temp - 273.15)
-                val mintemp:String? = String.format("%.2f", response_body.main.temp_min - 273.15)
-                val maxtemp:String? = String.format("%.2f", response_body.main.temp_max - 273)
-                val pressure: String?= response_body.main.pressure.toString()+" hPA"
-                val humidity: String?= response_body.main.humidity.toString()+" %"
-                val windspeed : String?= response_body.wind.speed.toString()+" m/s\n"+response_body.wind.deg.toString()+" Degrees"
-                val coordinates :String?= "Lat: "+response_body.coord.lat.toString()+"\n Lon: "+response_body.coord.lon.toString()
+                val response_body: Weather_Data? = response.body()
+                val temp:String = String.format("%.2f", response_body?.main?.temp?.minus(273.15))
+                val mintemp:String? = String.format("%.2f", response_body?.main?.temp_min?.minus(273.15))
+                val maxtemp:String? = String.format("%.2f", response_body?.main?.temp_max?.minus(273))
+                val pressure: String?= response_body?.main?.pressure.toString()+" hPA"
+                val humidity: String?= response_body?.main?.humidity.toString()+" %"
+                val windspeed : String?= response_body?.wind?.speed.toString()+" m/s\n"+ response_body?.wind?.deg.toString()+" Degrees"
+                val coordinates :String?= "Lat: "+ response_body?.coord?.lat.toString()+"\n Lon: "+ response_body?.coord?.lon.toString()
 
 
                 fun getDateTimeFromEpocLongOfSeconds(epoc: Long): String? {
@@ -58,16 +58,10 @@ class MainActivity : AppCompatActivity() {
                         return e.toString()
                     }
                 }
-                val sunrise:String? = getDateTimeFromEpocLongOfSeconds(response_body.sys.sunrise.toLong())
-                val sunset:String?= getDateTimeFromEpocLongOfSeconds(response_body.sys.sunset.toLong())
-                val visibility=response_body.visibility.toString()
-                val tempminmax:String?="Min: "+response_body.main.temp_min.toString()+"\n"+"Max: "+response_body.main.temp_max.toString()
-
-
-
-
-
-
+                val sunrise:String? = response_body?.sys?.sunrise?.let { getDateTimeFromEpocLongOfSeconds(it.toLong()) }
+                val sunset:String?= response_body?.sys?.sunset?.toLong()?.let { getDateTimeFromEpocLongOfSeconds(it) }
+                val visibility= response_body?.visibility.toString()
+                val tempminmax:String?="Min: "+ response_body?.main?.temp_min.toString()+"\n"+"Max: "+ response_body?.main?.temp_max.toString()
 
                 binding.text1.text = temp
                 binding.tempminmax.text=tempminmax
